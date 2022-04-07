@@ -6,6 +6,7 @@ using AutoMapper;
 using LibApp.Data;
 using LibApp.Dtos;
 using LibApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +25,7 @@ namespace LibApp.Controllers.Api
 
         // GET /api/books
         [HttpGet]
+        [Authorize(Roles = "User"), Authorize(Roles = "Owner"), Authorize(Roles = "StoreManager")]
         public IActionResult GetBooks()
         {
             var books = _context.Books
